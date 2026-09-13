@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Refuse un commit qui ferait dériver le README du contenu réel du dépôt.
+exec "$(git rev-parse --show-toplevel)/scripts/check-drift.sh" --repo-only

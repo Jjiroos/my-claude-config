@@ -21,9 +21,9 @@ description: Modifier ma config Claude Code (CLAUDE.md global, settings, permiss
 
 Pour rédiger un skill ou `CLAUDE.md` : skill `mattpocock-skills:writing-for-agents`.
 
-## Compatibilité my_llm_conf
+## Compatibilité my-multi-cli-config
 
-Les skills suivent le standard Agent Skills (`name` = nom du dossier, `description`) pour que `my_llm_conf` puisse les reprendre (ADR-0001). `paths`, `disable-model-invocation` et `allowed-tools` sont propres à Claude Code ; les métadonnées libres vont sous `metadata`.
+Les skills suivent le standard Agent Skills (`name` = nom du dossier, `description`) pour que `my-multi-cli-config` puisse les reprendre (ADR-0001). `paths`, `disable-model-invocation` et `allowed-tools` sont propres à Claude Code ; les métadonnées libres vont sous `metadata`.
 
 ## Hooks : pièges vérifiés
 

@@ -95,7 +95,7 @@ Sévérité : 🔴 cassé ou risqué · 🟠 coûte en tokens ou en temps · �
 
 ### Tranchées le 2026-09-13
 
-- Périmètre : config Claude dédiée, compatible `my_llm_conf` → [ADR-0001](../adr/0001-config-claude-dediee-compatible-my-llm-conf.md).
+- Périmètre : config Claude dédiée, compatible `my-multi-cli-config` (anciennement `my_llm_conf`) → [ADR-0001](../adr/0001-config-claude-dediee-compatible-my-multi-cli-config.md).
 - Permissions : allowlist + `ask` → [ADR-0002](../adr/0002-permissions-allowlist-et-ask.md).
 - Stacks couvertes : TS/Node, Python/uv, UE5 C++ via WSL, Java 17.
 - Méthode : superpowers et mattpocock à la carte → [ADR-0003](../adr/0003-superpowers-et-mattpocock-a-la-carte.md).

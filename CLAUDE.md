@@ -77,10 +77,11 @@ Dans le doute, un cran au-dessus : un Sonnet juste du premier coup coûte moins 
 
 ## Environnement
 
-- WSL2 sous Windows : outils Windows par l'interop (`cmd.exe /c`, `powershell.exe`, `taskkill.exe`) ; réseau en mode miroir, `127.0.0.1` partagé avec Windows.
-- Dépôts sur `/mnt/z`, lent sur les gros parcours : cible les recherches, et lance en tâche de fond tout scan de milliers de fichiers.
-- `sg` est ici `newgrp` : la recherche structurelle passe par `rg` multi-lignes ou l'AST du langage.
-- `piserv` (`pibot@piserv`) héberge la prod de certains projets : toute commande dessus est une action de prod.
+Deux machines partagent cette config ; `hostname` dit laquelle.
+
+- **Poste WSL2** : outils Windows par l'interop (`cmd.exe /c`, `powershell.exe`, `taskkill.exe`) ; réseau en mode miroir, `127.0.0.1` partagé avec Windows. Dépôts sur `/mnt/z`, lent sur les gros parcours : cible les recherches, et lance en tâche de fond tout scan de milliers de fichiers.
+- **`piserv`** : héberge la prod de certains projets ; toute commande sur cette machine est une action de prod.
+- `sg` est `newgrp` sur les deux machines : la recherche structurelle passe par `rg` multi-lignes ou l'AST du langage.
 
 ## Sessions
 

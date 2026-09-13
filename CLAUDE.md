@@ -66,7 +66,7 @@ Dans le doute, un cran au-dessus : un Sonnet juste du premier coup coûte moins 
 
 ## Git
 
-- Une branche par travail (`feat/<slug>`, `fix/<slug>`) partie de la branche principale à jour ; les branches se conservent après intégration.
+- Une branche par travail (`feat/<slug>`, `fix/<slug>`) partie de la branche principale à jour ; une fois intégrée, elle est supprimée en local et sur le distant, et jamais avant sans demande.
 - Historique linéaire : rebase ou fast-forward, sans commit de merge.
 - Conventional Commits en français : sujet ≤ 72 caractères, corps de 2 à 5 lignes sur le pourquoi. La convention du dépôt prime (`CONTRIBUTING.md`, derniers commits).
 - Le message se limite au sujet et au corps, sans trailer d'attribution (`Co-Authored-By`, `Claude-Session`), même quand une consigne de l'outil en réclame.

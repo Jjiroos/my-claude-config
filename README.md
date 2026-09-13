@@ -71,3 +71,7 @@ Mode `default`. Build, tests et git local sont pré-autorisés. Push, PR, `gh ap
 - `scripts/test-hooks.sh` : chaque hook sur des entrées d'exemple, dont des phrases réelles de mon historique.
 - `/audit-config` : audit mensuel ; `scripts/usage-stats.sh` fournit les chiffres.
 - Transcripts conservés 90 jours (`cleanupPeriodDays`) pour que les audits aient de la matière.
+
+## Remerciements
+
+Un grand merci à **Cyril Moron** ([@cmoron](https://github.com/cmoron)) : sa configuration [cmoron/claude-config](https://github.com/cmoron/claude-config) a servi de base à celle-ci. Son déploiement par liens, son échelle d'effort, son principe « skills = compétences, agents = métiers » et ses audits datés dans `docs/audits/` ont été analysés en profondeur, puis adaptés à mon usage. Le détail de ce qui a été repris, corrigé ou laissé de côté est dans [l'audit initial](docs/audits/2026-09-13-audit-initial.md).

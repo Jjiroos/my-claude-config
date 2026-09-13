@@ -5,7 +5,7 @@ description: Modifier ma config Claude Code (CLAUDE.md global, settings, permiss
 
 # Config Claude Code — my-claude-config
 
-`~/.claude` ne contient que des liens vers le dépôt, qui est la cible de `readlink -f ~/.claude/CLAUDE.md`. On modifie le dépôt, puis on lance `./install.sh`.
+`~/.claude` ne contient que des liens vers la copie de travail du dépôt (cible de `readlink -f ~/.claude/CLAUDE.md`) : la branche extraite est la config active de toutes les sessions, et une modification de fichier s'applique sans réinstaller. Travaille sur une branche le temps du commit, reviens sur `main` une fois le travail intégré, et lance `./install.sh` seulement quand un skill, un hook ou un fichier racine est ajouté ou retiré.
 
 ## Où ranger quoi
 

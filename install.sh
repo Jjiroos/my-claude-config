@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# install.sh — déploie my-claude-config dans ~/.claude par liens symboliques.
+# install.sh — déploie my-claude-config dans ~/.claude : liens symboliques, plugins,
+# et serveurs MCP de mcp/servers.json enregistrés en scope user.
 # Idempotent : relancer après chaque modification. Ce qui occupait déjà une place
 # gérée (fichier réel, autre lien) est déplacé dans ~/.claude/backups/, jamais supprimé.
 # Options : --dry-run (affiche sans rien modifier), --no-plugins (saute les plugins).
@@ -94,6 +95,26 @@ if $WITH_PLUGINS; then
       fi
     done < <(jq -r '.enabledPlugins // {} | to_entries[] | select(.value) | .key' "$REPO/settings.json")
   fi
+fi
+
+echo "→ MCP (mcp/servers.json, scope user)"
+if ! command -v claude >/dev/null; then
+  echo "  ⚠ CLI claude introuvable : relancer install.sh une fois Claude Code installé"
+else
+  # Réenregistrement de ce qui est déjà en place : la déclaration du dépôt fait foi,
+  # et la CLI n'expose pas les en-têtes d'un serveur enregistré, donc rien à comparer.
+  registered="$(claude mcp list 2>/dev/null || true)"
+  while IFS=$'\t' read -r name entry; do
+    [[ -n "$name" ]] || continue
+    if grep -q "^$name:" <<<"$registered"; then
+      run claude mcp remove "$name" --scope user
+      mark='↻'
+    else
+      mark='✓'
+    fi
+    run claude mcp add-json --scope user "$name" "$entry"
+    printf '  %s %s\n' "$mark" "$name"
+  done < <(jq -r '.mcpServers // {} | to_entries[] | "\(.key)\t\(.value | tojson)"' "$REPO/mcp/servers.json")
 fi
 
 echo "✓ Terminé. Redémarre Claude Code pour charger la config."

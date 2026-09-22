@@ -16,6 +16,7 @@ description: Modifier ma config Claude Code (CLAUDE.md global, settings, permiss
 | Procédure que le modèle déclenche seul | `skills/<nom>/SKILL.md`, description orientée déclencheurs |
 | Commande que je tape | `skills/<nom>/SKILL.md` avec `disable-model-invocation: true` |
 | Conventions d'un langage | `skills/stack-<langage>/` avec `paths` |
+| Serveur MCP pour tous mes projets | `mcp/servers.json`, enregistré en scope `user` par `install.sh` ; le secret reste en variable d'environnement |
 | Préférence ou correction propre à un projet | mémoire native du projet |
 | Décision dure à inverser | `docs/adr/NNNN-slug.md`, un paragraphe |
 

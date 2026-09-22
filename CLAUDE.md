@@ -57,6 +57,7 @@ Dans le doute, un cran au-dessus : un Sonnet juste du premier coup coûte moins 
 - Édition chirurgicale : le diff ne contient que ce que la tâche exige ; le code mort sans lien se signale.
 - Les tests arrivent avec le code ; un bug commence par un test qui le reproduit en échouant.
 - Outillage : celui du dépôt (lockfile, `pyproject.toml`, `pom.xml`), détaillé dans les skills `stack-*`.
+- API d'une bibliothèque tierce : le serveur MCP `context7` avant d'écrire l'appel, plutôt que ma mémoire — la version installée tranche. Pour Claude et l'API Anthropic, le skill `claude-api`.
 
 ## Avant de dire « fait »
 

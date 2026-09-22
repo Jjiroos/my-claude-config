@@ -79,6 +79,11 @@ while read -r reference; do
   grep -q "^${reference%%:*}@" <<<"$plugins" || drift "CLAUDE.md cite $reference, mais le plugin ${reference%%:*} n'est pas activé"
 done < <(grep -oE '`[a-z0-9-]+:[a-z0-9-]+`' "$REPO/CLAUDE.md" | tr -d '`' | sort -u)
 
+echo "→ MCP"
+jq empty "$REPO/mcp/servers.json" 2>/dev/null || drift "mcp/servers.json n'est pas un JSON valide"
+mcp_servers="$(jq -r '.mcpServers // {} | keys[]' "$REPO/mcp/servers.json" 2>/dev/null)"
+compare "serveur MCP" "README § MCP" "$mcp_servers" "$(readme_names MCP)"
+
 echo "→ CLAUDE.md"
 lines="$(wc -l <"$REPO/CLAUDE.md")"
 (( lines <= MAX_CLAUDE_MD_LINES )) || drift "CLAUDE.md : $lines lignes (cible ≤ $MAX_CLAUDE_MD_LINES)"
@@ -104,6 +109,21 @@ if ! $REPO_ONLY; then
       drift "lien mort : $entry"
     fi
   done
+
+  echo "→ MCP enregistrés"
+  if command -v claude >/dev/null; then
+    registered="$(claude mcp list 2>/dev/null || true)"
+    while read -r name; do
+      [[ -n "$name" ]] || continue
+      grep -q "^$name:" <<<"$registered" || drift "serveur MCP $name non enregistré (lancer install.sh)"
+    done <<<"$mcp_servers"
+  fi
+  # Une variable manquante ne casse pas le chargement : Claude Code envoie le ${VAR} littéral
+  # au serveur, qui répond 401. Mieux vaut le voir ici.
+  # shellcheck disable=SC2016 # le motif ${VAR} cherché est littéral
+  while read -r var; do
+    [[ -n "${!var:-}" ]] || drift "variable $var référencée par mcp/servers.json, absente de l'environnement"
+  done < <(grep -oE '\$\{[A-Z_][A-Z0-9_]*\}' "$REPO/mcp/servers.json" | tr -d '${}' | sort -u)
 fi
 
 if (( drifts == 0 )); then

@@ -6,7 +6,7 @@ Construite le 2026-09-13 à partir de l'analyse de la config de Cyril Moron et d
 
 ## Installer
 
-Prérequis : `claude`, `git`, `jq` ; `uv` pour le formatage Python ; `shellcheck` pour la vérification.
+Prérequis : `claude`, `git`, `jq` ; `uv` pour le formatage Python ; `shellcheck` pour la vérification ; les clés d'API des serveurs [MCP](#mcp) exportées dans l'environnement.
 
 ```bash
 ./install.sh --dry-run   # aperçu, sans rien modifier
@@ -23,6 +23,7 @@ settings.json    modèle, langue, attribution, permissions, hooks, plugins
 statusline.sh    barre d'état : modèle, % de contexte, tokens restants
 hooks/           scripts des hooks, liés en ~/.claude/hooks
 skills/          un dossier par skill, lié dans ~/.claude/skills
+mcp/             serveurs MCP, enregistrés en scope user par install.sh
 scripts/         vérification (check-drift, test-hooks) et mesure (usage-stats)
 docs/adr/        décisions dures à inverser
 docs/audits/     audits datés de la config
@@ -60,6 +61,22 @@ docs/audits/     audits datés de la config
 | `frontend-design@claude-plugins-official` | Direction visuelle des interfaces |
 
 Le routage entre les deux premiers vit dans `CLAUDE.md` (« Un skill par besoin ») ; voir [ADR-0003](docs/adr/0003-superpowers-et-mattpocock-a-la-carte.md).
+
+## MCP
+
+| Serveur | Endpoint | Rôle |
+|---|---|---|
+| `context7` | `https://mcp.context7.com/mcp` (HTTP) | Doc et exemples à jour d'une bibliothèque tierce, par version |
+
+Déclarés dans `mcp/servers.json` au format standard `mcpServers` (portable vers un autre client, cf. [ADR-0001](docs/adr/0001-config-claude-dediee-compatible-my-multi-cli-config.md)). `install.sh` les enregistre en scope `user`, c'est-à-dire dans `~/.claude.json`, donc actifs dans tous mes projets : `settings.json` n'accepte pas de bloc `mcpServers`.
+
+Aucune clé d'API dans le dépôt : l'entrée référence `${CONTEXT7_API_KEY}`, que Claude Code résout depuis l'environnement de la session. À poser une fois (clé gratuite sur [context7.com/dashboard](https://context7.com/dashboard)) :
+
+```bash
+echo 'export CONTEXT7_API_KEY=…' >> ~/.bashrc   # puis rouvrir le shell et redémarrer Claude Code
+```
+
+`claude mcp list` doit afficher `context7: … ✔ Connected` ; un `401` signale une clé absente ou invalide, `check-drift.sh` signale la variable manquante.
 
 ## Permissions
 

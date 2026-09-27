@@ -85,6 +85,16 @@ if $WITH_PLUGINS; then
   if ! command -v claude >/dev/null; then
     echo "  ⚠ CLI claude introuvable : relancer install.sh une fois Claude Code installé"
   else
+    # Marketplaces tierces d'abord : sans elles, l'installation de leurs plugins échoue.
+    known="$(claude plugin marketplace list 2>/dev/null || true)"
+    while read -r name repo; do
+      if grep -qE "❯ $name\$" <<<"$known"; then
+        printf '  = marketplace %s\n' "$name"
+      else
+        run claude plugin marketplace add "$repo"
+        printf '  ✓ marketplace %s\n' "$name"
+      fi
+    done < <(jq -r '.extraKnownMarketplaces // {} | to_entries[] | select(.value.source.source == "github") | "\(.key) \(.value.source.repo)"' "$REPO/settings.json")
     installed="$(claude plugin list 2>/dev/null || true)"
     while read -r plugin; do
       if grep -qF "$plugin" <<<"$installed"; then

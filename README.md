@@ -59,6 +59,7 @@ docs/audits/     audits datés de la config
 | `mattpocock-skills@claude-plugins-official` | grilling, tdd, diagnosing-bugs, domain-modeling, code-review, writing-for-agents |
 | `superpowers@claude-plugins-official` | Flux M et L+ : brainstorming, writing-plans, subagent-driven-development |
 | `frontend-design@claude-plugins-official` | Direction visuelle des interfaces |
+| `interface-design@interface-design` | Craft d'interface produit : design, revue, deslop (marketplace GitHub `Dammyjay93/interface-design`) |
 
 Le routage entre les deux premiers vit dans `CLAUDE.md` (« Un skill par besoin ») ; voir [ADR-0003](docs/adr/0003-superpowers-et-mattpocock-a-la-carte.md).
 

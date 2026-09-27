@@ -118,7 +118,7 @@
       "Read(//**/.env.local)",
       "Read(//**/.env.prod*)"
     ],
-    "defaultMode": "default"
+    "defaultMode": "auto"
   },
   "model": "opus",
   "hooks": {
@@ -166,7 +166,8 @@
     "frontend-design@claude-plugins-official": true,
     "mattpocock-skills@claude-plugins-official": true,
     "superpowers@claude-plugins-official": true,
-    "interface-design@interface-design": true
+    "interface-design@interface-design": true,
+    "clangd-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "interface-design": {
@@ -177,5 +178,6 @@
     }
   },
   "language": "français",
-  "effortLevel": "xhigh"
+  "effortLevel": "xhigh",
+  "agentPushNotifEnabled": true
 }

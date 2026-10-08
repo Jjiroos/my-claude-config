@@ -175,6 +175,12 @@
         "source": "github",
         "repo": "Dammyjay93/interface-design"
       }
+    },
+    "claude-plugins-official": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
+      }
     }
   },
   "language": "français",
